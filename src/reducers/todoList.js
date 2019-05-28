@@ -2,7 +2,6 @@ import localStorage from '../assets/js/saveState'
 const storageId = 'redux'
 
 export default (state = localStorage.restoreState(storageId), action) => {
-  let todoList, index;
   switch (action.type) {
     case 'ADD_TODO':
       return [...state, action.todo]
