@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import * as serviceWorker from './serviceWorker';
 import reducer from './reducers';
 import Home from './views/Home';
-import localStorage from './assets/js/saveState'
+import { saveState } from './middleware'
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-store.subscribe(() => localStorage.saveState('redux', store.getState().todoList))
+const store = createStore(reducer, applyMiddleware(saveState))
 
 ReactDOM.render(
   <Provider store={store}>
